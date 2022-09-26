@@ -6,6 +6,8 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDocs = require('./swagger.json');
 const routes = require('./routes/routes');
 const bodyParser = require('body-parser');
+const artefactRoutes = require('./routes/artefactRoutes');
+const artistRoutes = require('./routes/artistRoutes');
 
 
 const app = express()
@@ -24,8 +26,8 @@ const swaggerOptions = {
 //console.log(swaggerDocs);
 
 app.use(bodyParser.json());
-app.use("/", routes);
-
+app.use("/", artistRoutes);
+app.use("/", artefactRoutes);
 /**
  * @swagger
  * /api/artists:
