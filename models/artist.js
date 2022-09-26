@@ -1,8 +1,8 @@
-const sequelize = require('./../database/sequelize');
+const sequelize = require('../database/sequelize');
 const Sequelize = require('sequelize');
 
-module.exports = sequelize.define('artists', 
-    { id: {
+module.exports = sequelize.define('artists', {
+     id: {
         type: Sequelize.INTEGER,
         autoIncrement:true,
         primaryKey: true ,
@@ -10,7 +10,13 @@ module.exports = sequelize.define('artists',
     },
         first_name: {
         type: Sequelize.STRING, 
-        allowNull: false 
+        allowNull: false,
+        validate: {
+            notEmpty: {
+                args: true,
+                msg: 'First name is required'
+            }
+        }      
     },
         last_name: {
         type: Sequelize.STRING, 
@@ -22,12 +28,12 @@ module.exports = sequelize.define('artists',
         created_at: {
         type: "TIMESTAMP",
         defaultValue: sequelize.literal("CURRENT_TIMESTAMP"),
-        allowNull: false,
+       // allowNull: false,
     },
         modified_at: {
         type: "TIMESTAMP",
         defaultValue: sequelize.literal("CURRENT_TIMESTAMP"),
-        allowNull: false,
+       // allowNull: false,
     },
     },
         { timestamps: false }

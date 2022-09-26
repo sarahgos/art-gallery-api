@@ -1,0 +1,30 @@
+{
+  "name": "art-gallery-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js",
+    "swagger-autogen": "nodemon swagger.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sarahgos/art-gallery-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sarahgos/art-gallery-api/issues"
+  },
+  "homepage": "https://github.com/sarahgos/art-gallery-api#readme",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "express": "^4.18.1",
+    "mariadb": "^3.0.1",
+    "sequelize": "^6.23.1",
+    "swagger-autogen": "^2.22.0",
+    "swagger-jsdoc": "^6.2.5",
+    "swagger-ui-express": "^4.5.0"
+  }
+}
