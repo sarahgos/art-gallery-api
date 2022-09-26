@@ -1,9 +1,9 @@
 const Sequelize = require('sequelize');
-const Artist = require('../models/artist');
+const Exhibition = require('../models/exhibition');
 
 const { Op } = Sequelize;
 
-// Filter artists using sequelize.
+// Filter exhibitions using sequelize.
 exports.filter = (request, response) => {
     let filter = {};
     let { q } = request.query;
@@ -18,24 +18,24 @@ exports.filter = (request, response) => {
         };
     }
 
-    Artist.findAll(filter).then((artists) => {
-        response.json(artists);
+    Exhibition.findAll(filter).then((exhibitions) => {
+        response.json(exhibitions);
     });
 };
 
-// Returns all artists.
-exports.artistList = (request, response) => {
-    Artist.findAll().then((artists) => {
-        response.json(artists);
+// Returns all exhibitions.
+exports.exhibitionList = (request, response) => {
+    Exhibition.findAll().then((exhibition) => {
+        response.json(exhibition);
     })
 };
 
-// Returns artist by id.
-exports.artistById = (request, response) => {
+// Returns exhibition by id.
+exports.exhibitionById = (request, response) => {
     let { id } = request.params;
-    Artist.findByPk(id).then((artist) => {
-        if (artist) {
-            response.json(artist);
+    Exhibition.findByPk(id).then((exhibition) => {
+        if (exhibition) {
+            response.json(exhibition);
         }
         else {
             response.status(404).send();
@@ -43,60 +43,65 @@ exports.artistById = (request, response) => {
     })
 };
 
-exports.createArtist = (request, response) => {
+// Create an exahibition.
+exports.createExhibition = (request, response) => {
 
-    if (!request.body.first_name || !request.body.last_name) {
+    if (!request.body.title || !request.body.artists) {
         response.status(400).send({
           message: "Content can not be empty!"
         });
         return;
       }
 
-    const artist = {
-        first_name: request.body.first_name,
-        last_name: request.body.last_name,
-        dob: request.body.dob ? request.body.dob : false,
+    const exhibition = {
+        title: request.body.title,
+        artists: request.body.artists,
+        description: request.body.description ? request.body.description : false,
+        type: request.body.type,
+        start_date: request.body.start_date,
+        end_date: request.body.end_date,
         created_at: Sequelize.fn('NOW'),
         modified_at: Sequelize.fn('NOW')
     }
 
-    Artist.create(artist)
+    Exhibition.create(exhibition)
       .then((data) => {
         response.send(data);
     })
     .catch(err => {
         response.status(500).send({
           message:
-            err.message || "An error occurred while creating the Artist."
+            err.message || "An error occurred while creating the Exhibition."
         });
       });
 };
 
-exports.updateArtist = (request, response) => {
+// Update and exhibition
+exports.updateExhibition = (request, response) => {
 
     let { id } = request.params;
 
-    Artist.update(request.body, {
+    Exhibition.update(request.body, {
         where: { id: id }
     })
     .then(num => {
         if (num == 1) {
-            Artist.update({
+            Exhibition.update({
                 modified_at: Sequelize.fn('NOW'),
             },
               {  where: { id: id } });
             response.send({
-            message: "Artist was updated successfully."
+            message: "Exhibition was updated successfully."
             });
         } else {
             response.send({
-            message: `Cannot update Artist with id=${id}. Maybe Artist was not found or request.body is empty!`
+            message: `Cannot update Exhibition with id=${id}. Maybe Exhibition was not found or request.body is empty!`
             });
         }
         })
         .catch(err => {
         response.status(500).send({
-            message: "Error updating Artist with id=" + id
+            message: "Error updating Exhibition with id=" + id
         });
         });
     };

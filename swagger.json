@@ -14,9 +14,6 @@
     "/artists": {
       "get": {
         "description": "",
-        "tags": [
-            "artists"
-        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -26,9 +23,6 @@
       },
       "post": {
         "description": "",
-        "tags": [
-            "artists"
-        ],
         "parameters": [
           {
             "name": "body",
@@ -65,9 +59,6 @@
     "/artists/{id}": {
       "get": {
         "description": "",
-        "tags": [
-            "artists"
-        ],
         "parameters": [
           {
             "name": "id",
@@ -87,9 +78,6 @@
       },
       "post": {
         "description": "",
-        "tags": [
-            "artefacts"
-        ],
         "parameters": [
           {
             "name": "id",
@@ -111,9 +99,6 @@
     "/artefacts": {
       "get": {
         "description": "",
-        "tags": [
-            "artefacts"
-        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -123,9 +108,6 @@
       },
       "post": {
         "description": "",
-        "tags": [
-            "artefacts"
-        ],
         "parameters": [
           {
             "name": "body",
@@ -171,9 +153,6 @@
     "/artefacts/{id}": {
       "get": {
         "description": "",
-        "tags": [
-            "artefacts"
-        ],
         "parameters": [
           {
             "name": "id",
@@ -193,9 +172,100 @@
       },
       "post": {
         "description": "",
-        "tags": [
-            "artefacts"
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
         ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/exhibition": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "example": "any"
+                },
+                "artists": {
+                  "example": "any"
+                },
+                "description": {
+                  "example": "any"
+                },
+                "type": {
+                  "example": "any"
+                },
+                "start_date": {
+                  "example": "any"
+                },
+                "end_date": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/exhibition/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "post": {
+        "description": "",
         "parameters": [
           {
             "name": "id",
