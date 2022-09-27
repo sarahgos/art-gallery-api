@@ -1,17 +1,13 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('exhibitions', {
-    id: {
+    exhibition_id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
     title: {
-      type: DataTypes.STRING(500),
-      allowNull: false
-    },
-    artists: {
       type: DataTypes.STRING(500),
       allowNull: false
     },
@@ -45,14 +41,14 @@ module.exports = function(sequelize, DataTypes) {
     sequelize,
     tableName: 'exhibitions',
     timestamps: false,
-    camelCase: true,
+    underscored: true,
     indexes: [
       {
         name: "PRIMARY",
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "id" },
+          { name: "exhibition_id" },
         ]
       },
     ]

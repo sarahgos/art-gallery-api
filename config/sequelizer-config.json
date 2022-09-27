@@ -1,4 +1,4 @@
 { 
    "timestamps": false,
-   "camelCase": true
+   "underscored": true
 }

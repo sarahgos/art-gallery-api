@@ -36,7 +36,7 @@ exports.artefactList = (request, response) => {
 // Returns artefacts by id.
 exports.artefactById = (request, response) => {
     let { id } = request.params;
-    Artist.findByPk(id).then((artefact) => {
+    Artefact.findByPk(id).then((artefact) => {
         if (artefact) {
             response.json(artefact);
         }
@@ -49,7 +49,7 @@ exports.artefactById = (request, response) => {
 // Creates a new artefact
 exports.createArtefact = (request, response) => {
 
-    if (!request.body.artist || !request.body.title) {
+    if (!request.body.title) {
         response.status(400).send({
           message: "Content can not be empty!"
         });
@@ -57,7 +57,7 @@ exports.createArtefact = (request, response) => {
       }
 
     const artefact = {
-        artist: request.body.artist,
+        artist_id: request.body.artist_id,
         title: request.body.title,
         description: request.body.description ? request.body.description : false,
         type: request.body.type,

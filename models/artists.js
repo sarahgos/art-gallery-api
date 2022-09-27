@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('artists', {
-    id: {
+    artist_id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -37,14 +37,14 @@ module.exports = function(sequelize, DataTypes) {
     sequelize,
     tableName: 'artists',
     timestamps: false,
-    camelCase: true,
+    underscored: true,
     indexes: [
       {
         name: "PRIMARY",
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "id" },
+          { name: "artist_id" },
         ]
       },
     ]

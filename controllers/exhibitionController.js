@@ -3,6 +3,7 @@ const sequelize = require('../database/sequelize');
 const initModels = require('../models/init-models').initModels;
 const models = initModels(sequelize);
 const Exhibition = models.exhibitions;
+const ExhibitionArtefact = models.exhibition_artefacts;
 
 const { Op } = Sequelize;
 
@@ -30,6 +31,13 @@ exports.filter = (request, response) => {
 exports.exhibitionList = (request, response) => {
     Exhibition.findAll().then((exhibition) => {
         response.json(exhibition);
+    })
+};
+
+// Returns all exhibitions.
+exports.exhibitionArtefactsList = (request, response) => {
+    ExhibitionArtefact.findAll().then((exhibitionArtefacts) => {
+        response.json(exhibitionArtefacts);
     })
 };
 
@@ -69,6 +77,28 @@ exports.createExhibition = (request, response) => {
 
     Exhibition.create(exhibition)
       .then((data) => {
+        response.send(data);
+    })
+    .catch(err => {
+        response.status(500).send({
+          message:
+            err.message || "An error occurred while creating the Exhibition."
+        });
+      });
+};
+
+// Create an exahibition.
+exports.addExhibitionArtefact = (request, response) => {
+
+    const exh_art = {
+        exhibition_id: request.params.exhibition_id ,
+        artefact_id: request.params.artefact_id,
+        created_at: Sequelize.fn('NOW'),
+        modified_at: Sequelize.fn('NOW')  
+    }
+
+    ExhibitionArtefact.create(exh_art) 
+    .then((data) => {
         response.send(data);
     })
     .catch(err => {
@@ -134,3 +164,4 @@ exports.deleteExhibition = (request, response) => {
         });
       });
   };
+

@@ -1,31 +1,27 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('artefacts', {
-    artefact_id: {
+  return sequelize.define('exhibition_artefacts', {
+    exh_art_id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    title: {
-      type: DataTypes.STRING(500),
-      allowNull: false
+    exhibition_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'exhibitions',
+        key: 'exhibition_id'
+      }
     },
-    description: {
-      type: DataTypes.STRING(500),
-      allowNull: true
-    },
-    type: {
-      type: DataTypes.STRING(200),
-      allowNull: false
-    },
-    material: {
-      type: DataTypes.STRING(200),
-      allowNull: false
-    },
-    date: {
-      type: DataTypes.DATEONLY,
-      allowNull: true
+    artefact_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'artefacts',
+        key: 'artefact_id'
+      }
     },
     created_at: {
       type: DataTypes.DATE,
@@ -36,18 +32,10 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DATE,
       allowNull: false,
       defaultValue: "0000-00-00 00:00:00"
-    },
-    artist_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'artists',
-        key: 'artist_id'
-      }
     }
   }, {
     sequelize,
-    tableName: 'artefacts',
+    tableName: 'exhibition_artefacts',
     timestamps: false,
     underscored: true,
     indexes: [
@@ -56,14 +44,21 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "artefact_id" },
+          { name: "exh_art_id" },
         ]
       },
       {
-        name: "FK_artist_artefact",
+        name: "FK_exhibition_id",
         using: "BTREE",
         fields: [
-          { name: "artist_id" },
+          { name: "exhibition_id" },
+        ]
+      },
+      {
+        name: "FK_artefact_id",
+        using: "BTREE",
+        fields: [
+          { name: "artefact_id" },
         ]
       },
     ]

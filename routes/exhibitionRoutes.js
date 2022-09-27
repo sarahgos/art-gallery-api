@@ -8,11 +8,17 @@ router.get('/exhibition', exhibitionController.filter);
 // Gets all exhibition
 router.get('/exhibition', exhibitionController.exhibitionList);
 
+// Gets all exhibition artefacts
+router.get('/exhibition-artefacts', exhibitionController.exhibitionArtefactsList);
+
 // Gets exhibition by id
 router.get('/exhibition/:id', exhibitionController.exhibitionById);
 
 // Posts new exhibition
 router.post('/exhibition', exhibitionController.createExhibition);
+
+// Posts exhibition artefacts
+router.post('/exhibition-artefacts/:exhibition_id/:artefact_id', exhibitionController.addExhibitionArtefact);
 
 // Updates an exhibition
 router.put('/exhibition/:id', exhibitionController.updateExhibition);

@@ -84,24 +84,6 @@
             "in": "path",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "first_name": {
-                  "example": "any"
-                },
-                "last_name": {
-                  "example": "any"
-                },
-                "dob": {
-                  "example": "any"
-                }
-              }
-            }
           }
         ],
         "responses": {
@@ -152,10 +134,10 @@
             "schema": {
               "type": "object",
               "properties": {
-                "artist": {
+                "title": {
                   "example": "any"
                 },
-                "title": {
+                "artist_id": {
                   "example": "any"
                 },
                 "description": {
@@ -215,33 +197,6 @@
             "in": "path",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "artist": {
-                  "example": "any"
-                },
-                "title": {
-                  "example": "any"
-                },
-                "description": {
-                  "example": "any"
-                },
-                "type": {
-                  "example": "any"
-                },
-                "material": {
-                  "example": "any"
-                },
-                "date": {
-                  "example": "any"
-                }
-              }
-            }
           }
         ],
         "responses": {
@@ -327,6 +282,17 @@
         }
       }
     },
+    "/exhibition-artefacts": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/exhibition/{id}": {
       "get": {
         "description": "",
@@ -355,33 +321,6 @@
             "in": "path",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "title": {
-                  "example": "any"
-                },
-                "artists": {
-                  "example": "any"
-                },
-                "description": {
-                  "example": "any"
-                },
-                "type": {
-                  "example": "any"
-                },
-                "start_date": {
-                  "example": "any"
-                },
-                "end_date": {
-                  "example": "any"
-                }
-              }
-            }
           }
         ],
         "responses": {
@@ -398,6 +337,33 @@
         "parameters": [
           {
             "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/exhibition-artefacts/{exhibition_id}/{artefact_id}": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "exhibition_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "artefact_id",
             "in": "path",
             "required": true,
             "type": "string"
