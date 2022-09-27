@@ -15,6 +15,9 @@ router.get('/artefacts/:id', artefactController.artefactById);
 router.post('/artefacts', artefactController.createArtefact);
 
 // Updates an artefacts
-router.post('/artefacts/:id', artefactController.updateArtefact);
+router.put('/artefacts/:id', artefactController.updateArtefact);
+
+// Deletes an artefacts
+router.delete('/artefacts/:id', artefactController.deleteArtefact);
 
 module.exports = router;

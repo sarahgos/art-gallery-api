@@ -1,5 +1,8 @@
 const Sequelize = require('sequelize');
-const Artefact = require('../models/artefact');
+const sequelize = require('../database/sequelize');
+const initModels = require('../models/init-models').initModels;
+const models = initModels(sequelize);
+const Artefact = models.artefacts;
 
 const { Op } = Sequelize;
 
@@ -105,3 +108,29 @@ exports.updateArtefact = (request, response) => {
         });
         });
     };
+
+// Delete an artefact
+exports.deleteArtefact = (request, response) => {
+
+    let { id } = request.params;
+
+    Artefact.destroy({
+        where: { id: id }
+    })
+    .then(num => {
+        if (num == 1) {
+          response.send({
+            message: "Artefact was deleted successfully!"
+          });
+        } else {
+          response.send({
+            message: `Cannot delete Artefact with id=${id}. Maybe Artefact was not found!`
+          });
+        }
+      })
+      .catch(err => {
+        response.status(500).send({
+          message: "Could not delete Artefact with id=" + id
+        });
+      });
+  };

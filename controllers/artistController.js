@@ -1,5 +1,8 @@
 const Sequelize = require('sequelize');
-const Artist = require('../models/artist');
+const sequelize = require('../database/sequelize');
+const initModels = require('../models/init-models').initModels;
+const models = initModels(sequelize);
+const Artist = models.artists;
 
 const { Op } = Sequelize;
 
@@ -17,7 +20,7 @@ exports.filter = (request, response) => {
             }
         };
     }
-
+    
     Artist.findAll(filter).then((artists) => {
         response.json(artists);
     });
@@ -100,3 +103,29 @@ exports.updateArtist = (request, response) => {
         });
         });
     };
+
+// Delete an artist
+exports.deleteArtist = (request, response) => {
+
+    let { id } = request.params;
+
+    Artist.destroy({
+        where: { id: id }
+    })
+    .then(num => {
+        if (num == 1) {
+          response.send({
+            message: "Artists was deleted successfully!"
+          });
+        } else {
+          response.send({
+            message: `Cannot delete Artists with id=${id}. Maybe Artists was not found!`
+          });
+        }
+      })
+      .catch(err => {
+        response.status(500).send({
+          message: "Could not delete Artists with id=" + id
+        });
+      });
+  };

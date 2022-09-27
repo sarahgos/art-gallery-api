@@ -15,6 +15,9 @@ router.get('/artists/:id', artistController.artistById);
 router.post('/artists', artistController.createArtist);
 
 // Updates an artist
-router.post('/artists/:id', artistController.updateArtist);
+router.put('/artists/:id', artistController.updateArtist);
+
+// Updates an artist
+router.delete('/artists/:id', artistController.deleteArtist);
 
 module.exports = router;

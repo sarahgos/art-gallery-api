@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "nodemon env.js",
     "start": "nodemon app.js",
     "swagger-autogen": "nodemon swagger.js"
   },
@@ -20,9 +20,13 @@
   "homepage": "https://github.com/sarahgos/art-gallery-api#readme",
   "dependencies": {
     "body-parser": "^1.20.0",
+    "export": "^0.1.337",
     "express": "^4.18.1",
     "mariadb": "^3.0.1",
+    "mysql2": "^2.3.3",
     "sequelize": "^6.23.1",
+    "sequelize-auto": "^0.8.8",
+    "sequelize-auto-models": "^0.2.14",
     "swagger-autogen": "^2.22.0",
     "swagger-jsdoc": "^6.2.5",
     "swagger-ui-express": "^4.5.0"

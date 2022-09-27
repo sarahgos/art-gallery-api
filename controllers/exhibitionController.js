@@ -1,5 +1,8 @@
 const Sequelize = require('sequelize');
-const Exhibition = require('../models/exhibition');
+const sequelize = require('../database/sequelize');
+const initModels = require('../models/init-models').initModels;
+const models = initModels(sequelize);
+const Exhibition = models.exhibitions;
 
 const { Op } = Sequelize;
 
@@ -105,3 +108,29 @@ exports.updateExhibition = (request, response) => {
         });
         });
     };
+
+// Delete an exhibition
+exports.deleteExhibition = (request, response) => {
+
+    let { id } = request.params;
+
+    Exhibition.destroy({
+        where: { id: id }
+    })
+    .then(num => {
+        if (num == 1) {
+          response.send({
+            message: "Exhibition was deleted successfully!"
+          });
+        } else {
+          response.send({
+            message: `Cannot delete Exhibition with id=${id}. Maybe Exhibition was not found!`
+          });
+        }
+      })
+      .catch(err => {
+        response.status(500).send({
+          message: "Could not delete Exhibition with id=" + id
+        });
+      });
+  };

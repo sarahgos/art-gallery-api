@@ -15,6 +15,9 @@ router.get('/exhibition/:id', exhibitionController.exhibitionById);
 router.post('/exhibition', exhibitionController.createExhibition);
 
 // Updates an exhibition
-router.post('/exhibition/:id', exhibitionController.updateExhibition);
+router.put('/exhibition/:id', exhibitionController.updateExhibition);
+
+// Deletes an exhibition
+router.delete('/exhibition/:id', exhibitionController.deleteExhibition);
 
 module.exports = router;
