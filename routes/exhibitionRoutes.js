@@ -11,6 +11,9 @@ router.get('/exhibition', exhibitionController.exhibitionList);
 // Gets all exhibition artefacts
 router.get('/exhibition-artefacts', exhibitionController.exhibitionArtefactsList);
 
+// Gets exhibition artefacts by exhibition id.
+router.get('/exhibition-artefacts/:exhibition_id', exhibitionController.exhibitionArtefactByExhibitionIdList);
+
 // Gets exhibition by id
 router.get('/exhibition/:id', exhibitionController.exhibitionById);
 

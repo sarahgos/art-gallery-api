@@ -41,6 +41,17 @@ exports.exhibitionArtefactsList = (request, response) => {
     })
 };
 
+// Returns exhibition artefact by exhibition id.
+exports.exhibitionArtefactByExhibitionIdList = (request, response) => {
+
+    ExhibitionArtefact.findAll({
+        where : { exhibition_id: request.params.exhibition_id }
+    })
+    .then((exhibitionArtefacts) => {
+        response.json(exhibitionArtefacts);
+    })
+};
+
 // Returns exhibition by id.
 exports.exhibitionById = (request, response) => {
     let { id } = request.params;
