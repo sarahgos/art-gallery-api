@@ -36,8 +36,8 @@ exports.artistList = (request, response) => {
 
 // Returns artist by id.
 exports.artistById = (request, response) => {
-    let { id } = request.params;
-    Artist.findByPk(id).then((artist) => {
+    let { artist_id } = request.params;
+    Artist.findByPk(artist_id).then((artist) => {
         if (artist) {
             response.json(artist);
         }
@@ -79,10 +79,10 @@ exports.createArtist = (request, response) => {
 // Update an artist
 exports.updateArtist = (request, response) => {
 
-    let { id } = request.params;
+    let { artist_id } = request.params;
 
     Artist.update(request.body, {
-        where: { id: id }
+        where: { artist_id: artist_id }
     })
     .then(num => {
         if (num == 1) {
@@ -101,7 +101,7 @@ exports.updateArtist = (request, response) => {
         })
         .catch(err => {
         response.status(500).send({
-            message: "Error updating Artist with id=" + id
+            message: "Error updating Artist with id=" + artist_id
         });
         });
     };

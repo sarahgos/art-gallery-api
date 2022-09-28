@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const artefactController = require("../controllers/artefactController");
+const { requiresAuth } = require("express-openid-connect");
 
 // Filters artefacts
 router.get('/artefacts', artefactController.filter);
@@ -12,12 +13,12 @@ router.get('/artefacts', artefactController.artefactList);
 router.get('/artefacts/:artefact_id', artefactController.artefactById);
 
 // Posts new artefacts
-router.post('/artefacts', artefactController.createArtefact);
+router.post('/artefacts', requiresAuth(), artefactController.createArtefact);
 
 // Updates an artefacts
-router.put('/artefacts/:artefact_id', artefactController.updateArtefact);
+router.put('/artefacts/:artefact_id', requiresAuth(), artefactController.updateArtefact);
 
 // Deletes an artefacts
-router.delete('/artefacts/:artefact_id', artefactController.deleteArtefact);
+router.delete('/artefacts/:artefact_id', requiresAuth(), artefactController.deleteArtefact);
 
 module.exports = router;
