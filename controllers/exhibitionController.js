@@ -65,10 +65,10 @@ exports.exhibitionById = (request, response) => {
     })
 };
 
-// Create an exahibition.
+// Create an exhibition.
 exports.createExhibition = (request, response) => {
 
-    if (!request.body.title || !request.body.artists) {
+    if (!request.body.title) {
         response.status(400).send({
           message: "Content can not be empty!"
         });
@@ -77,7 +77,6 @@ exports.createExhibition = (request, response) => {
 
     const exhibition = {
         title: request.body.title,
-        artists: request.body.artists,
         description: request.body.description ? request.body.description : false,
         type: request.body.type,
         start_date: request.body.start_date,
@@ -98,7 +97,7 @@ exports.createExhibition = (request, response) => {
       });
 };
 
-// Create an exahibition.
+// Create an exhibition artefact.
 exports.addExhibitionArtefact = (request, response) => {
 
     const exh_art = {
@@ -153,10 +152,14 @@ exports.updateExhibition = (request, response) => {
 // Delete an exhibition
 exports.deleteExhibition = (request, response) => {
 
-    let { id } = request.params;
+    let { exhibition_id } = request.params;
+
+    ExhibitionArtefact.destroy({
+        where : { exhibition_id: exhibition_id }
+    })
 
     Exhibition.destroy({
-        where: { id: id }
+        where: { exhibition_id: exhibition_id }
     })
     .then(num => {
         if (num == 1) {
@@ -174,5 +177,7 @@ exports.deleteExhibition = (request, response) => {
           message: "Could not delete Exhibition with id=" + id
         });
       });
+
+
   };
 

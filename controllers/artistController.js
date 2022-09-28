@@ -3,6 +3,7 @@ const sequelize = require('../database/sequelize');
 const initModels = require('../models/init-models').initModels;
 const models = initModels(sequelize);
 const Artist = models.artists;
+const Artefact = models.artefacts;
 
 const { Op } = Sequelize;
 
@@ -46,6 +47,7 @@ exports.artistById = (request, response) => {
     })
 };
 
+// Create an artist
 exports.createArtist = (request, response) => {
 
     if (!request.body.first_name || !request.body.last_name) {
@@ -75,6 +77,7 @@ exports.createArtist = (request, response) => {
       });
 };
 
+// Update an artist
 exports.updateArtist = (request, response) => {
 
     let { id } = request.params;
@@ -107,10 +110,14 @@ exports.updateArtist = (request, response) => {
 // Delete an artist
 exports.deleteArtist = (request, response) => {
 
-    let { id } = request.params;
+    let { artist_id } = request.params;
+
+    Artefact.destroy({
+        where : { artist_id: artist_id }
+    })
 
     Artist.destroy({
-        where: { id: id }
+        where: { artist_id: artist_id }
     })
     .then(num => {
         if (num == 1) {
@@ -119,13 +126,13 @@ exports.deleteArtist = (request, response) => {
           });
         } else {
           response.send({
-            message: `Cannot delete Artists with id=${id}. Maybe Artists was not found!`
+            message: `Cannot delete Artists with id=${artist_id}. Maybe Artists was not found!`
           });
         }
       })
       .catch(err => {
         response.status(500).send({
-          message: "Could not delete Artists with id=" + id
+          message: "Could not delete Artists with id=" + artist_id
         });
       });
   };

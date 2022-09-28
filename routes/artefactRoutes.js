@@ -9,15 +9,15 @@ router.get('/artefacts', artefactController.filter);
 router.get('/artefacts', artefactController.artefactList);
 
 // Gets artefacts by id
-router.get('/artefacts/:id', artefactController.artefactById);
+router.get('/artefacts/:artefact_id', artefactController.artefactById);
 
 // Posts new artefacts
 router.post('/artefacts', artefactController.createArtefact);
 
 // Updates an artefacts
-router.put('/artefacts/:id', artefactController.updateArtefact);
+router.put('/artefacts/:artefact_id', artefactController.updateArtefact);
 
 // Deletes an artefacts
-router.delete('/artefacts/:id', artefactController.deleteArtefact);
+router.delete('/artefacts/:artefact_id', artefactController.deleteArtefact);
 
 module.exports = router;

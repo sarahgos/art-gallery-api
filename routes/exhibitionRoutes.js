@@ -27,6 +27,6 @@ router.post('/exhibition-artefacts/:exhibition_id/:artefact_id', exhibitionContr
 router.put('/exhibition/:id', exhibitionController.updateExhibition);
 
 // Deletes an exhibition
-router.delete('/exhibition/:id', exhibitionController.deleteExhibition);
+router.delete('/exhibition/:exhibition_id', exhibitionController.deleteExhibition);
 
 module.exports = router;

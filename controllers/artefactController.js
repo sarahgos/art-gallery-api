@@ -3,6 +3,7 @@ const sequelize = require('../database/sequelize');
 const initModels = require('../models/init-models').initModels;
 const models = initModels(sequelize);
 const Artefact = models.artefacts;
+const ExhibitionArtefact = models.exhibition_artefacts;
 
 const { Op } = Sequelize;
 
@@ -35,8 +36,8 @@ exports.artefactList = (request, response) => {
 
 // Returns artefacts by id.
 exports.artefactById = (request, response) => {
-    let { id } = request.params;
-    Artefact.findByPk(id).then((artefact) => {
+    let { artefact_id } = request.params;
+    Artefact.findByPk(artefact_id).then((artefact) => {
         if (artefact) {
             response.json(artefact);
         }
@@ -82,29 +83,29 @@ exports.createArtefact = (request, response) => {
 // Updates an artefact
 exports.updateArtefact = (request, response) => {
 
-    let { id } = request.params;
+    let { artefact_id } = request.params;
 
     Artefact.update(request.body, {
-        where: { id: id }
+        where: { artefact_id: artefact_id }
     })
     .then(num => {
         if (num == 1) {
             Artefact.update({
                 modified_at: Sequelize.fn('NOW'),
             },
-              {  where: { id: id } });
+              {  where: { artefact_id: artefact_id } });
             response.send({
             message: "Artefact was updated successfully."
             });
         } else {
             response.send({
-            message: `Cannot update Artefact with id=${id}. Maybe Artefact was not found or request.body is empty!`
+            message: `Cannot update Artefact with id=${artefact_id}. Maybe Artefact was not found or request.body is empty!`
             });
         }
         })
         .catch(err => {
         response.status(500).send({
-            message: "Error updating Artefact with id=" + id
+            message: "Error updating Artefact with id=" + artefact_id
         });
         });
     };
@@ -112,10 +113,14 @@ exports.updateArtefact = (request, response) => {
 // Delete an artefact
 exports.deleteArtefact = (request, response) => {
 
-    let { id } = request.params;
+    let { artefact_id } = request.params;
+
+    ExhibitionArtefact.destroy({
+        where : { artefact_id: artefact_id }
+    })
 
     Artefact.destroy({
-        where: { id: id }
+        where: { artefact_id: artefact_id }
     })
     .then(num => {
         if (num == 1) {
@@ -124,13 +129,13 @@ exports.deleteArtefact = (request, response) => {
           });
         } else {
           response.send({
-            message: `Cannot delete Artefact with id=${id}. Maybe Artefact was not found!`
+            message: `Cannot delete Artefact with id=${artefact_id}. Maybe Artefact was not found!`
           });
         }
       })
       .catch(err => {
         response.status(500).send({
-          message: "Could not delete Artefact with id=" + id
+          message: "Could not delete Artefact with id=" + artefact_id
         });
       });
   };
