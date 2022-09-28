@@ -71,8 +71,7 @@ exports.createArtist = (request, response) => {
     })
     .catch(err => {
         response.status(500).send({
-          message:
-            err.message || "An error occurred while creating the Artist."
+          message: "An error occurred while creating the Artist."
         });
       });
 };
@@ -91,12 +90,12 @@ exports.updateArtist = (request, response) => {
                 modified_at: Sequelize.fn('NOW'),
             },
               {  where: { id: id } });
-            response.send({
-            message: "Artist was updated successfully."
+            response.status(200).send({
+                message: "Artist was updated successfully."
             });
         } else {
-            response.send({
-            message: `Cannot update Artist with id=${id}. Maybe Artist was not found or request.body is empty!`
+            response.status(404).send({
+                message: "Cannot update Artist. Maybe Artist was not found or request.body is empty."
             });
         }
         })
@@ -107,7 +106,7 @@ exports.updateArtist = (request, response) => {
         });
     };
 
-// Delete an artist
+// Delete an artist an associated artefacts
 exports.deleteArtist = (request, response) => {
 
     let { artist_id } = request.params;
@@ -121,12 +120,12 @@ exports.deleteArtist = (request, response) => {
     })
     .then(num => {
         if (num == 1) {
-          response.send({
-            message: "Artists was deleted successfully!"
+          response.status(200).send({
+            message: "Artists was deleted successfully."
           });
         } else {
-          response.send({
-            message: `Cannot delete Artists with id=${artist_id}. Maybe Artists was not found!`
+          response.status(404).send({
+            message: "Artist with id was not found."
           });
         }
       })

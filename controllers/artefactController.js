@@ -74,8 +74,7 @@ exports.createArtefact = (request, response) => {
     })
     .catch(err => {
         response.status(500).send({
-          message:
-            err.message || "An error occurred while creating the Artefact."
+          message: "An error occurred while creating the Artefact."
         });
       });
 };
@@ -94,12 +93,12 @@ exports.updateArtefact = (request, response) => {
                 modified_at: Sequelize.fn('NOW'),
             },
               {  where: { artefact_id: artefact_id } });
-            response.send({
-            message: "Artefact was updated successfully."
+            response.status(200).send({
+                message: "Artefact was updated successfully."
             });
         } else {
-            response.send({
-            message: `Cannot update Artefact with id=${artefact_id}. Maybe Artefact was not found or request.body is empty!`
+            response.status(404).send({
+                message: "Cannot update Artefact. Maybe Artefact was not found or request.body is empty."
             });
         }
         })
@@ -110,7 +109,7 @@ exports.updateArtefact = (request, response) => {
         });
     };
 
-// Delete an artefact
+// Delete an artefact and associated exhibition artefacts
 exports.deleteArtefact = (request, response) => {
 
     let { artefact_id } = request.params;
@@ -129,7 +128,7 @@ exports.deleteArtefact = (request, response) => {
           });
         } else {
           response.send({
-            message: `Cannot delete Artefact with id=${artefact_id}. Maybe Artefact was not found!`
+            message: "Artefact with id not found."
           });
         }
       })

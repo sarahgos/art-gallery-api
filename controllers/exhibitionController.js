@@ -54,8 +54,8 @@ exports.exhibitionArtefactByExhibitionIdList = (request, response) => {
 
 // Returns exhibition by id.
 exports.exhibitionById = (request, response) => {
-    let { id } = request.params;
-    Exhibition.findByPk(id).then((exhibition) => {
+    let { exhibition_id } = request.params;
+    Exhibition.findByPk(exhibition_id).then((exhibition) => {
         if (exhibition) {
             response.json(exhibition);
         }
@@ -113,8 +113,7 @@ exports.addExhibitionArtefact = (request, response) => {
     })
     .catch(err => {
         response.status(500).send({
-          message:
-            err.message || "An error occurred while creating the Exhibition."
+          message: "An error occurred while creating the Exhibition."
         });
       });
 };
@@ -122,10 +121,10 @@ exports.addExhibitionArtefact = (request, response) => {
 // Update and exhibition
 exports.updateExhibition = (request, response) => {
 
-    let { id } = request.params;
+    let { exhibition_id } = request.params;
 
     Exhibition.update(request.body, {
-        where: { id: id }
+        where: { exhibition_id: exhibition_id }
     })
     .then(num => {
         if (num == 1) {
@@ -133,23 +132,23 @@ exports.updateExhibition = (request, response) => {
                 modified_at: Sequelize.fn('NOW'),
             },
               {  where: { id: id } });
-            response.send({
-            message: "Exhibition was updated successfully."
+            response.status(200).send({
+                message: "Exhibition was updated successfully."
             });
         } else {
-            response.send({
-            message: `Cannot update Exhibition with id=${id}. Maybe Exhibition was not found or request.body is empty!`
+            response.status(404).send({
+            message: "Cannot update Exhibition. Maybe Exhibition was not found or request.body is empty."
             });
         }
         })
         .catch(err => {
         response.status(500).send({
-            message: "Error updating Exhibition with id=" + id
+            message: "Error updating Exhibition with id=" + exhibition_id
         });
         });
     };
 
-// Delete an exhibition
+// Delete an exhibition and associated exhibition artefacts
 exports.deleteExhibition = (request, response) => {
 
     let { exhibition_id } = request.params;
@@ -163,18 +162,18 @@ exports.deleteExhibition = (request, response) => {
     })
     .then(num => {
         if (num == 1) {
-          response.send({
-            message: "Exhibition was deleted successfully!"
+          response.status(200).send({
+            message: "Exhibition was deleted successfully."
           });
         } else {
-          response.send({
-            message: `Cannot delete Exhibition with id=${id}. Maybe Exhibition was not found!`
+          response.status(404).send({
+            message: "Exhibition with id not found."
           });
         }
       })
       .catch(err => {
         response.status(500).send({
-          message: "Could not delete Exhibition with id=" + id
+          message: "Could not delete Exhibition with id=" + exhibition_id
         });
       });
 
