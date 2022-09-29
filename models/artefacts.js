@@ -23,10 +23,6 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(200),
       allowNull: false
     },
-    date: {
-      type: DataTypes.DATEONLY,
-      allowNull: true
-    },
     created_at: {
       type: DataTypes.DATE,
       allowNull: false,
@@ -44,6 +40,10 @@ module.exports = function(sequelize, DataTypes) {
         model: 'artists',
         key: 'artist_id'
       }
+    },
+    year_made: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     }
   }, {
     sequelize,

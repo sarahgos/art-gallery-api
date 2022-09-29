@@ -9,6 +9,9 @@ router.get('/artefacts', artefactController.filter);
 // Gets all artefacts
 router.get('/artefacts', artefactController.artefactList);
 
+// Gets all artefacts
+router.get('/artefacts-artist/:artist_id', artefactController.artefactsArtistList);
+
 // Gets artefacts by id
 router.get('/artefacts/:artefact_id', artefactController.artefactById);
 

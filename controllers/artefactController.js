@@ -34,6 +34,23 @@ exports.artefactList = (request, response) => {
     })
 };
 
+// Returns all artefacts by artist.
+exports.artefactsArtistList = (request, response) => {
+
+    let { artist_id } = request.params;
+
+    Artefact.findAll({
+        where: { artist_id: artist_id }
+    }).then((artefactsArtist) => {
+        if (artefactsArtist) {
+            response.json(artefactsArtist);
+        }
+        else {
+            response.status(404).send();
+        }
+    })
+};
+
 // Returns artefacts by id.
 exports.artefactById = (request, response) => {
     let { artefact_id } = request.params;
@@ -63,7 +80,7 @@ exports.createArtefact = (request, response) => {
         description: request.body.description ? request.body.description : false,
         type: request.body.type,
         material: request.body.material,
-        date: request.body.date,
+        year_made: request.body.year_made,
         created_at: Sequelize.fn('NOW'),
         modified_at: Sequelize.fn('NOW')
     }

@@ -25,7 +25,7 @@ router.post('/exhibition', requiresAuth(), exhibitionController.createExhibition
 router.post('/exhibition-artefacts/:exhibition_id/:artefact_id', requiresAuth(), exhibitionController.addExhibitionArtefact);
 
 // Updates an exhibition
-router.put('/exhibition/:id', requiresAuth(), exhibitionController.updateExhibition);
+router.put('/exhibition/:exhibition_id', requiresAuth(), exhibitionController.updateExhibition);
 
 // Deletes an exhibition
 router.delete('/exhibition/:exhibition_id', requiresAuth(), exhibitionController.deleteExhibition);

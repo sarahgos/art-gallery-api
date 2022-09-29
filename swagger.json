@@ -56,12 +56,12 @@
         }
       }
     },
-    "/artists/{id}": {
+    "/artists/{artist_id}": {
       "get": {
         "description": "",
         "parameters": [
           {
-            "name": "id",
+            "name": "artist_id",
             "in": "path",
             "required": true,
             "type": "string"
@@ -80,7 +80,7 @@
         "description": "",
         "parameters": [
           {
-            "name": "id",
+            "name": "artist_id",
             "in": "path",
             "required": true,
             "type": "string"
@@ -89,6 +89,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -99,7 +102,7 @@
         "description": "",
         "parameters": [
           {
-            "name": "id",
+            "name": "artist_id",
             "in": "path",
             "required": true,
             "type": "string"
@@ -108,6 +111,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -149,7 +155,7 @@
                 "material": {
                   "example": "any"
                 },
-                "date": {
+                "year_made": {
                   "example": "any"
                 }
               }
@@ -169,12 +175,33 @@
         }
       }
     },
-    "/artefacts/{id}": {
+    "/artefacts-artist/{artist_id}": {
       "get": {
         "description": "",
         "parameters": [
           {
-            "name": "id",
+            "name": "artist_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/artefacts/{artefact_id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "artefact_id",
             "in": "path",
             "required": true,
             "type": "string"
@@ -193,15 +220,45 @@
         "description": "",
         "parameters": [
           {
-            "name": "id",
+            "name": "artefact_id",
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "example": "any"
+                },
+                "artist_id": {
+                  "example": "any"
+                },
+                "description": {
+                  "example": "any"
+                },
+                "type": {
+                  "example": "any"
+                },
+                "material": {
+                  "example": "any"
+                },
+                "year_made": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -212,7 +269,7 @@
         "description": "",
         "parameters": [
           {
-            "name": "id",
+            "name": "artefact_id",
             "in": "path",
             "required": true,
             "type": "string"
@@ -336,30 +393,38 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "example": "any"
+                },
+                "description": {
+                  "example": "any"
+                },
+                "type": {
+                  "example": "any"
+                },
+                "start_date": {
+                  "example": "any"
+                },
+                "end_date": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "OK"
           },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "delete": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
+          "404": {
+            "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -387,6 +452,30 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/exhibition/{exhibition_id}": {
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "exhibition_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"

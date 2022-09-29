@@ -34,7 +34,7 @@ exports.exhibitionList = (request, response) => {
     })
 };
 
-// Returns all exhibitions.
+// Returns all exhibition artefacts.
 exports.exhibitionArtefactsList = (request, response) => {
     ExhibitionArtefact.findAll().then((exhibitionArtefacts) => {
         response.json(exhibitionArtefacts);
@@ -122,6 +122,8 @@ exports.addExhibitionArtefact = (request, response) => {
 exports.updateExhibition = (request, response) => {
 
     let { exhibition_id } = request.params;
+    console.log(exhibition_id);
+    console.log(request.body);
 
     Exhibition.update(request.body, {
         where: { exhibition_id: exhibition_id }
