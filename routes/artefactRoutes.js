@@ -3,9 +3,6 @@ const router = express.Router();
 const artefactController = require("../controllers/artefactController");
 const { requiresAuth } = require("express-openid-connect");
 
-// Filters artefacts
-router.get('/artefacts', artefactController.filter);
-
 // Gets all artefacts
 router.get('/artefacts', artefactController.artefactList);
 

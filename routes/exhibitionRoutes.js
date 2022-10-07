@@ -3,31 +3,28 @@ const router = express.Router();
 const exhibitionController = require("../controllers/exhibitionController");
 const { requiresAuth } = require("express-openid-connect");
 
-// Filters exhibition
-router.get('/exhibition', exhibitionController.filter);
-
 // Gets all exhibition
-router.get('/exhibition', exhibitionController.exhibitionList);
+router.get('/exhibitions', exhibitionController.exhibitionList);
 
 // Gets all exhibition artefacts
-router.get('/exhibition-artefacts', exhibitionController.exhibitionArtefactsList);
+router.get('/exhibitions-artefacts', exhibitionController.exhibitionArtefactsList);
 
 // Gets exhibition artefacts by exhibition id.
-router.get('/exhibition-artefacts/:exhibition_id', exhibitionController.exhibitionArtefactByExhibitionIdList);
+router.get('/exhibitions-artefacts/:exhibition_id', exhibitionController.exhibitionArtefactByExhibitionIdList);
 
 // Gets exhibition by id
-router.get('/exhibition/:id', exhibitionController.exhibitionById);
+router.get('/exhibitions/:id', exhibitionController.exhibitionById);
 
 // Posts new exhibition
-router.post('/exhibition', requiresAuth(), exhibitionController.createExhibition);
+router.post('/exhibitions', requiresAuth(), exhibitionController.createExhibition);
 
 // Posts exhibition artefacts
-router.post('/exhibition-artefacts/:exhibition_id/:artefact_id', requiresAuth(), exhibitionController.addExhibitionArtefact);
+router.post('/exhibitions-artefacts/:exhibition_id/:artefact_id', requiresAuth(), exhibitionController.addExhibitionArtefact);
 
 // Updates an exhibition
-router.put('/exhibition/:exhibition_id', requiresAuth(), exhibitionController.updateExhibition);
+router.put('/exhibitions/:exhibition_id', requiresAuth(), exhibitionController.updateExhibition);
 
 // Deletes an exhibition
-router.delete('/exhibition/:exhibition_id', requiresAuth(), exhibitionController.deleteExhibition);
+router.delete('/exhibitions/:exhibition_id', requiresAuth(), exhibitionController.deleteExhibition);
 
 module.exports = router;

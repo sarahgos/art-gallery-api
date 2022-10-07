@@ -5,28 +5,6 @@ const models = initModels(sequelize);
 const Exhibition = models.exhibitions;
 const ExhibitionArtefact = models.exhibition_artefacts;
 
-const { Op } = Sequelize;
-
-// Filter exhibitions using sequelize.
-exports.filter = (request, response) => {
-    let filter = {};
-    let { q } = request.query;
-
-    if (q) {
-        filter = {
-            where: {
-                first_name: {
-                    [Op.like]: `${q}%`
-                }
-            }
-        };
-    }
-
-    Exhibition.findAll(filter).then((exhibitions) => {
-        response.json(exhibitions);
-    });
-};
-
 // Returns all exhibitions.
 exports.exhibitionList = (request, response) => {
     Exhibition.findAll().then((exhibition) => {
@@ -178,7 +156,5 @@ exports.deleteExhibition = (request, response) => {
           message: "Could not delete Exhibition with id=" + exhibition_id
         });
       });
-
-
   };
 

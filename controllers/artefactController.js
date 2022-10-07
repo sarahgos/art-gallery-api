@@ -5,28 +5,6 @@ const models = initModels(sequelize);
 const Artefact = models.artefacts;
 const ExhibitionArtefact = models.exhibition_artefacts;
 
-const { Op } = Sequelize;
-
-// Filter artefacts using sequelize.
-exports.filter = (request, response) => {
-    let filter = {};
-    let { q } = request.query;
-
-    if (q) {
-        filter = {
-            where: {
-                first_name: {
-                    [Op.like]: `${q}%`
-                }
-            }
-        };
-    }
-
-    Artefact.findAll(filter).then((artefact) => {
-        response.json(artefact);
-    });
-};
-
 // Returns all artefacts.
 exports.artefactList = (request, response) => {
     Artefact.findAll().then((artefacts) => {

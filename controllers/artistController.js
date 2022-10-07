@@ -5,28 +5,6 @@ const models = initModels(sequelize);
 const Artist = models.artists;
 const Artefact = models.artefacts;
 
-const { Op } = Sequelize;
-
-// Filter artists using sequelize.
-exports.filter = (request, response) => {
-    let filter = {};
-    let { q } = request.query;
-
-    if (q) {
-        filter = {
-            where: {
-                first_name: {
-                    [Op.like]: `${q}%`
-                }
-            }
-        };
-    }
-    
-    Artist.findAll(filter).then((artists) => {
-        response.json(artists);
-    });
-};
-
 // Returns all artists.
 exports.artistList = (request, response) => {
     Artist.findAll().then((artists) => {

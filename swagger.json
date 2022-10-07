@@ -14,6 +14,9 @@
     "/artists": {
       "get": {
         "description": "",
+        "tags": [
+          "artists"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -23,6 +26,9 @@
       },
       "post": {
         "description": "",
+        "tags": [
+          "artists"
+        ],
         "parameters": [
           {
             "name": "body",
@@ -59,6 +65,9 @@
     "/artists/{artist_id}": {
       "get": {
         "description": "",
+        "tags": [
+          "artists"
+        ],
         "parameters": [
           {
             "name": "artist_id",
@@ -78,6 +87,9 @@
       },
       "put": {
         "description": "",
+        "tags": [
+          "artists"
+        ],
         "parameters": [
           {
             "name": "artist_id",
@@ -100,6 +112,9 @@
       },
       "delete": {
         "description": "",
+        "tags": [
+          "artists"
+        ],
         "parameters": [
           {
             "name": "artist_id",
@@ -124,6 +139,9 @@
     "/artefacts": {
       "get": {
         "description": "",
+        "tags": [
+          "artefacts"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -133,6 +151,9 @@
       },
       "post": {
         "description": "",
+        "tags": [
+          "artefacts"
+        ],
         "parameters": [
           {
             "name": "body",
@@ -178,6 +199,9 @@
     "/artefacts-artist/{artist_id}": {
       "get": {
         "description": "",
+        "tags": [
+          "artefacts"
+        ],
         "parameters": [
           {
             "name": "artist_id",
@@ -199,6 +223,9 @@
     "/artefacts/{artefact_id}": {
       "get": {
         "description": "",
+        "tags": [
+          "artefacts"
+        ],
         "parameters": [
           {
             "name": "artefact_id",
@@ -218,6 +245,9 @@
       },
       "put": {
         "description": "",
+        "tags": [
+          "artefacts"
+        ],
         "parameters": [
           {
             "name": "artefact_id",
@@ -267,6 +297,9 @@
       },
       "delete": {
         "description": "",
+        "tags": [
+          "artefacts"
+        ],
         "parameters": [
           {
             "name": "artefact_id",
@@ -285,9 +318,12 @@
         }
       }
     },
-    "/exhibition": {
+    "/exhibitions": {
       "get": {
         "description": "",
+        "tags": [
+          "exhibitions"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -297,6 +333,9 @@
       },
       "post": {
         "description": "",
+        "tags": [
+          "exhibitions"
+        ],
         "parameters": [
           {
             "name": "body",
@@ -336,9 +375,12 @@
         }
       }
     },
-    "/exhibition-artefacts": {
+    "/exhibitions-artefacts": {
       "get": {
         "description": "",
+        "tags": [
+          "exhibitions"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -347,9 +389,12 @@
         }
       }
     },
-    "/exhibition-artefacts/{exhibition_id}": {
+    "/exhibitions-artefacts/{exhibition_id}": {
       "get": {
         "description": "",
+        "tags": [
+          "exhibitions"
+        ],
         "parameters": [
           {
             "name": "exhibition_id",
@@ -365,9 +410,12 @@
         }
       }
     },
-    "/exhibition/{id}": {
+    "/exhibitions/{id}": {
       "get": {
         "description": "",
+        "tags": [
+          "exhibitions"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -387,6 +435,9 @@
       },
       "put": {
         "description": "",
+        "tags": [
+          "exhibitions"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -432,9 +483,12 @@
         }
       }
     },
-    "/exhibition-artefacts/{exhibition_id}/{artefact_id}": {
+    "/exhibitions-artefacts/{exhibition_id}/{artefact_id}": {
       "post": {
         "description": "",
+        "tags": [
+          "exhibitions"
+        ],
         "parameters": [
           {
             "name": "exhibition_id",
@@ -459,9 +513,12 @@
         }
       }
     },
-    "/exhibition/{exhibition_id}": {
+    "/exhibitions/{exhibition_id}": {
       "delete": {
         "description": "",
+        "tags": [
+          "exhibitions"
+        ],
         "parameters": [
           {
             "name": "exhibition_id",
