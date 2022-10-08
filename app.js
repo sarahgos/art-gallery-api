@@ -29,7 +29,7 @@ app.use("/", artistRoutes);
 app.use("/", artefactRoutes);
 app.use("/", exhibitionRoutes);
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
   
 app.listen(3000, () => {
     console.log("server listening on port 3000!");

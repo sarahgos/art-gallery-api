@@ -111,7 +111,7 @@ exports.updateExhibition = (request, response) => {
             Exhibition.update({
                 modified_at: Sequelize.fn('NOW'),
             },
-              {  where: { id: id } });
+              {  where: { exhibition_id: exhibition_id } });
             response.status(200).send({
                 message: "Exhibition was updated successfully."
             });

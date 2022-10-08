@@ -67,7 +67,7 @@ exports.updateArtist = (request, response) => {
             Artist.update({
                 modified_at: Sequelize.fn('NOW'),
             },
-              {  where: { id: id } });
+              {  where: { artist_id: artist_id } });
             response.status(200).send({
                 message: "Artist was updated successfully."
             });

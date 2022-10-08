@@ -13,7 +13,7 @@ router.get('/exhibitions-artefacts', exhibitionController.exhibitionArtefactsLis
 router.get('/exhibitions-artefacts/:exhibition_id', exhibitionController.exhibitionArtefactByExhibitionIdList);
 
 // Gets exhibition by id
-router.get('/exhibitions/:id', exhibitionController.exhibitionById);
+router.get('/exhibitions/:exhibition_id', exhibitionController.exhibitionById);
 
 // Posts new exhibition
 router.post('/exhibitions', requiresAuth(), exhibitionController.createExhibition);

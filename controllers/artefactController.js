@@ -78,9 +78,10 @@ exports.createArtefact = (request, response) => {
 exports.updateArtefact = (request, response) => {
 
     let { artefact_id } = request.params;
-
+    console.log(request.body);
     Artefact.update(request.body, {
         where: { artefact_id: artefact_id }
+        
     })
     .then(num => {
         if (num == 1) {
